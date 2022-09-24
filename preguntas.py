@@ -171,8 +171,7 @@ def pregunta_10():
     def concat(row):
         val = row.sort_values().astype(str).to_list()
         return ":".join(val)
-    table = tbl0.groupby(tbl0._c1)["_c2"].agg(concat).reset_index()
-    table = table.rename(columns={"_c1":"_c0", "_c2":"_c1"})
+    table = tbl0.groupby(tbl0._c1)["_c2"].agg(concat)
     return table
 
 
@@ -229,7 +228,7 @@ def pregunta_12():
             
     df = tbl2.groupby(tbl1._c0)[["_c5a", "_c5b"]].agg(concat).apply(val_concat, axis=1).reset_index()
     df._c0 = df._c0.astype(int)
-    df = df.rename(columns  = {0:"_c5"}, inplace=True)
+    df = df.rename(columns  = {0:"_c5"})
     return df
     
     
@@ -251,3 +250,7 @@ def pregunta_13():
     """
     df_merge = tbl0.merge(tbl2,on="_c0")
     return df_merge.groupby(df_merge._c1)["_c5b"].sum()
+
+
+if __name__ == "__main__":
+    pregunta_10()
