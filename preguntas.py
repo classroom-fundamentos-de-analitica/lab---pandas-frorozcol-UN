@@ -172,7 +172,7 @@ def pregunta_10():
         val = row.sort_values().astype(str).to_list()
         return ":".join(val)
     table = tbl0.groupby(tbl0._c1)["_c2"].agg(concat)
-    return table
+    return table.to_frame()
 
 
 def pregunta_11():
@@ -229,7 +229,7 @@ def pregunta_12():
     df = tbl2.groupby(tbl1._c0)[["_c5a", "_c5b"]].agg(concat).apply(val_concat, axis=1).reset_index()
     df._c0 = df._c0.astype(int)
     df = df.rename(columns  = {0:"_c5"})
-    return df
+    return df.to_frame()
     
     
 
