@@ -213,17 +213,18 @@ def pregunta_12():
     39   39                    ggg:3,hhh:8,jjj:5
     """
     def concat(row):
-        val = row.sort_values().astype(str).to_list()
+        val = row.astype(str).to_list()
         return ",".join(val)
     def val_concat(row):
         val1 = row["_c5a"].split(",")
         val2 = row["_c5b"].split(",")
-        r = ""
+        r = []
         for i in range(len(val1)):
             a = val1[i]
             b = val2[i]
-            r += a + ":" + b + ","
-        return r[:-1]
+            r.append(a + ":" + b)
+        r = list(sorted(r))
+        return ",".join(r)
             
             
     df = tbl2.groupby(tbl2._c0)[["_c5a", "_c5b"]].agg(concat).apply(val_concat, axis=1).reset_index()
@@ -251,3 +252,6 @@ def pregunta_13():
     df_merge = tbl0.merge(tbl2,on="_c0")
     return df_merge.groupby(df_merge._c1)["_c5b"].sum()
 
+
+if __name__ == "__main__":
+    pregunta_12()
