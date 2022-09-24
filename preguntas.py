@@ -226,10 +226,10 @@ def pregunta_12():
         return r[:-1]
             
             
-    df = tbl2.groupby(tbl1._c0)[["_c5a", "_c5b"]].agg(concat).apply(val_concat, axis=1).reset_index()
+    df = tbl2.groupby(tbl2._c0)[["_c5a", "_c5b"]].agg(concat).apply(val_concat, axis=1).reset_index()
     df._c0 = df._c0.astype(int)
     df = df.rename(columns  = {0:"_c5"})
-    return df.to_frame()
+    return df
     
     
 
@@ -251,6 +251,3 @@ def pregunta_13():
     df_merge = tbl0.merge(tbl2,on="_c0")
     return df_merge.groupby(df_merge._c1)["_c5b"].sum()
 
-
-if __name__ == "__main__":
-    pregunta_10()
